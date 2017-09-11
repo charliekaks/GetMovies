@@ -9,6 +9,7 @@ import butterknife.ButterKnife;
 
 public class movies extends AppCompatActivity {
     @Bind(R.id.movieGrid) GridView mMovieGrid;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
