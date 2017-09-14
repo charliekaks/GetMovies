@@ -1,7 +1,9 @@
 package com.kaks.charles.getyourmovies;
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.Display;
 import android.widget.GridView;
 
 import butterknife.Bind;
@@ -15,6 +17,11 @@ public class movies extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_movies);
         ButterKnife.bind(this);
-        mMovieGrid.setAdapter(new ImageAdapter(this));
+
+        Intent intent = getIntent();
+        String categories = intent.getStringExtra("categories");
+
+
+
     }
 }

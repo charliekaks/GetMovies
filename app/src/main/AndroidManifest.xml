@@ -22,11 +22,6 @@
             </intent-filter>
         </activity>
         <activity android:name=".movies" />
-        <activity android:name=".Docs" />
-        <activity android:name=".Tv" />
-        <activity
-            android:name=".LoginActivity"
-            android:label="@string/title_activity_login"></activity>
     </application>
 
 </manifest>
