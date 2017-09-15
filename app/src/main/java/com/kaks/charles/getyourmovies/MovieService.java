@@ -70,7 +70,7 @@ public class MovieService {
                     String overview = movieResults.getString("overview");
                     String original_title = movieResults.getString("original_title");
                     String title = movieResults.getString("title");
-                    String imageUrl = movieResults.getString("poster_path");
+                    String imageUrl = "https://image.tmdb.org/t/p/w500"+movieResults.getString("poster_path");
                     String release = movieResults.getString("release_date");
                     Integer voter_average = movieResults.getInt("vote_average");
                     Integer popularity = movieResults.getInt("popularity");

@@ -19,18 +19,13 @@ import okhttp3.Callback;
 import okhttp3.Response;
 
 public class Popular extends AppCompatActivity {
-    public ArrayList<MovieModel> popsMovie= new ArrayList<>();
+    public ArrayList<MovieModel> mMovies= new ArrayList<>();
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_popular);
-        final RecyclerView PopularMovieAdapter = (RecyclerView) findViewById(R.id.popular_list);
-        final LinearLayoutManager popularLayout = new LinearLayoutManager(this);
-        PopularMovieAdapter.setLayoutManager(popularLayout);
-        PopularMovieAdapter moviePops = new PopularMovieAdapter(this,popsMovie);
-        PopularMovieAdapter.setAdapter(moviePops);
-
         getPopular();
+
 
     }
 
@@ -49,6 +44,12 @@ public class Popular extends AppCompatActivity {
                 Popular.this.runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
+                        final RecyclerView PopularMovieAdapter = (RecyclerView) findViewById(R.id.popular_list);
+                        final LinearLayoutManager popularLayout = new LinearLayoutManager(getApplicationContext());
+                        PopularMovieAdapter.setLayoutManager(popularLayout);
+                        PopularMovieAdapter moviePops = new PopularMovieAdapter(getApplicationContext(),mMovies);
+                        PopularMovieAdapter.setAdapter(moviePops);
+                        PopularMovieAdapter.setHasFixedSize(true);
                         for (MovieModel movie :mMovies){
                             Log.d("movie overview",movie.getOverview());
                             Log.d("The original Title", movie.getOriginal_title());
