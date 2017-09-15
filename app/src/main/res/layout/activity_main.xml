@@ -31,16 +31,25 @@
         app:layout_constraintTop_toTopOf="parent"
         android:id="@+id/textView" />
 
+    <Button
+        android:id="@+id/button_movies"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/button_genre"
+        android:layout_alignStart="@+id/button_genre"
+        android:layout_below="@+id/textView"
+        android:layout_marginTop="48dp"
+        android:text="Movies" />
+
     <EditText
         android:id="@+id/edittext_categories"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:ems="10"
-        android:inputType="textPersonName"
-        android:text="Name"
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
-        android:layout_marginBottom="174dp" />
+        android:layout_marginBottom="174dp"
+        android:ems="10"
+        android:inputType="textPersonName" />
 
     <Button
         android:id="@+id/button_genre"
