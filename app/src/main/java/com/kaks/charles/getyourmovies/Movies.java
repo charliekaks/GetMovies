@@ -4,12 +4,17 @@ import android.content.Intent;
 import android.graphics.Movie;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.Display;
 import android.widget.GridView;
 import android.widget.TextView;
 
+import com.kaks.charles.getyourmovies.adapter.MovieSearchAdapter;
+import com.kaks.charles.getyourmovies.adapter.PopularMovieAdapter;
 import com.kaks.charles.getyourmovies.models.MovieModel;
+import com.kaks.charles.getyourmovies.models.MovieSearch;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -32,7 +37,7 @@ public class Movies extends AppCompatActivity {
 
         Intent intent = getIntent();
         String categories = intent.getStringExtra("categories");
-        mTextView.setText(categories);
+//        mTextView.setText(categories);
         getMovies(categories);
 
     }
@@ -47,16 +52,23 @@ public class Movies extends AppCompatActivity {
 
                 @Override
                 public void onResponse(Call call, Response response)  {
-                    final ArrayList<MovieModel> mMovies = movieService.processMovies(response);
+                    final ArrayList<MovieSearch> mMovies = movieService.processMoviesSearched(response);
                     Movies.this.runOnUiThread(new Runnable() {
                         @Override
                         public void run() {
-                            for (MovieModel movie :mMovies){
+                            final RecyclerView MovieSearchAdapter = (RecyclerView) findViewById(R.id.search_list);
+                            final LinearLayoutManager searchLayout = new LinearLayoutManager(getApplicationContext());
+                            MovieSearchAdapter.setLayoutManager(searchLayout);
+                            MovieSearchAdapter movieSearch = new MovieSearchAdapter(getApplicationContext(),mMovies);
+                            MovieSearchAdapter.setAdapter(movieSearch);
+                            MovieSearchAdapter.setHasFixedSize(true);
+                            for (MovieSearch movie :mMovies){
                                 Log.d("movie overview",movie.getOverview());
-                                Log.d("The original Title", movie.getOriginal_title());
+                                Log.d("The original Name", movie.getOriginal_name());
                                 Log.d("The movie Title", movie.getTitle());
                                 Log.d("The Movie Poster", movie.getPoster_path());
                                 Log.d("Release Date",movie.getRelease_date());
+                                Log.d("First Release",movie.getFirst_release());
                                 Log.d("Popularity",Double.toString(movie.getPopularity()));
                                 Log.d("Voter Average",Double.toString(movie.getVote_average()));
                             }
