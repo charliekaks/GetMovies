@@ -1,5 +1,6 @@
 package com.kaks.charles.getyourmovies;
 
+import android.content.Context;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -17,6 +18,8 @@ import butterknife.Bind;
 import okhttp3.Call;
 import okhttp3.Callback;
 import okhttp3.Response;
+import uk.co.chrisjenx.calligraphy.CalligraphyConfig;
+import uk.co.chrisjenx.calligraphy.CalligraphyContextWrapper;
 
 public class Popular extends AppCompatActivity {
     public ArrayList<MovieModel> mMovies= new ArrayList<>();
@@ -25,8 +28,15 @@ public class Popular extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_popular);
         getPopular();
+        CalligraphyConfig.initDefault(new CalligraphyConfig.Builder()
+                .setDefaultFontPath("fonts/amita_regular.ttf")
+                .setFontAttrId(R.attr.fontPath)
+                .build());
 
-
+    }
+    @Override
+    protected void attachBaseContext(Context newBase) {
+        super.attachBaseContext(CalligraphyContextWrapper.wrap(newBase));
     }
 
     public void getPopular(){

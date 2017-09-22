@@ -1,14 +1,16 @@
 package com.kaks.charles.getyourmovies.models;
 import java.util.List;
+import org.parceler.Parcel;
 
+@Parcel
 public class MovieModel {
     private String overview;
     private String original_title;
     private String title;
     private String poster_path;
     private String release_date;
-    private Integer vote_average;
-    private Integer popularity;
+    private int vote_average;
+    private int popularity;
     public MovieModel(){
     }
     public MovieModel(String overview, String original_title, String title, String poster_path, String release_date, Integer vote_average, Integer popularity){
