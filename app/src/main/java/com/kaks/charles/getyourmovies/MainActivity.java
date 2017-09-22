@@ -2,11 +2,19 @@ package com.kaks.charles.getyourmovies;
 
 import android.content.Context;
 import android.content.Intent;
+import android.icu.util.ULocale;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
@@ -17,8 +25,31 @@ public class MainActivity extends AppCompatActivity {
     @Bind(R.id.edittext_categories) EditText mEditCategory;
     @Bind(R.id.button_genre) Button mButtonGenre;
     @Bind(R.id.button_movies) Button mButtonMovies;
+    private DatabaseReference mPopularMovies;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+
+            mPopularMovies = FirebaseDatabase
+                    .getInstance()
+                    .getReference()
+                    .child(Constants.FIREBASE_CHILD_SEARCHED_MOVIE);
+        mPopularMovies.addValueEventListener(new ValueEventListener() { //attach listener to listen for changes in the DB.
+
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) { //something changes intialsize this method
+                for (DataSnapshot categorySnapshot : dataSnapshot.getChildren()) {
+                    String category = categorySnapshot.getValue().toString();
+                    Log.d("Locations updated", "location: " + category); //log
+                }
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) { //update UI here if error occurred.
+
+            }
+        });
+
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         ButterKnife.bind(this);
@@ -31,6 +62,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 String category = mEditCategory.getText().toString();
+                saveCategoryToFirebase(category );
                 Intent intent = new Intent(MainActivity.this, Movies.class);
                 intent.putExtra("categories", category);
                 startActivity(intent);
@@ -46,6 +78,9 @@ public class MainActivity extends AppCompatActivity {
         });
 
 
+    }
+    public void saveCategoryToFirebase(String category) {
+        mPopularMovies.setValue(category);
     }
     @Override
     protected void attachBaseContext(Context newBase) {
