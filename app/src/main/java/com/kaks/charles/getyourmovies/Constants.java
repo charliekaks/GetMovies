@@ -14,5 +14,6 @@ public class Constants {
     public static final String API_KEY = "api_key";
     public static final String POPULAR_MOVIES_FIREBASE = "popularMovies";
     public static final String FIREBASE_CHILD_SEARCHED_MOVIE = "searchedMovie";
+    public static final String FIREBASE_CHILD_POPULAR_MOVIES = "popular";
 
 }

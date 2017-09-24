@@ -1,25 +1,21 @@
-package com.kaks.charles.getyourmovies;
+package com.kaks.charles.getyourmovies.UI;
 
 import android.content.Intent;
-import android.graphics.Movie;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
-import android.view.Display;
-import android.widget.GridView;
 import android.widget.TextView;
 
+import com.kaks.charles.getyourmovies.Service.MovieService;
+import com.kaks.charles.getyourmovies.R;
 import com.kaks.charles.getyourmovies.adapter.MovieSearchAdapter;
-import com.kaks.charles.getyourmovies.adapter.PopularMovieAdapter;
-import com.kaks.charles.getyourmovies.models.MovieModel;
 import com.kaks.charles.getyourmovies.models.MovieSearch;
 
 import java.io.IOException;
 import java.util.ArrayList;
 
-import butterknife.Bind;
 import butterknife.ButterKnife;
 import okhttp3.Call;
 import okhttp3.Callback;

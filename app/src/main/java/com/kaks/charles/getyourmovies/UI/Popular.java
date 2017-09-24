@@ -1,20 +1,20 @@
-package com.kaks.charles.getyourmovies;
+package com.kaks.charles.getyourmovies.UI;
 
 import android.content.Context;
-import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 
+import com.kaks.charles.getyourmovies.Service.MovieService;
+import com.kaks.charles.getyourmovies.R;
 import com.kaks.charles.getyourmovies.adapter.PopularMovieAdapter;
 import com.kaks.charles.getyourmovies.models.MovieModel;
 
 import java.io.IOException;
 import java.util.ArrayList;
 
-import butterknife.Bind;
 import okhttp3.Call;
 import okhttp3.Callback;
 import okhttp3.Response;

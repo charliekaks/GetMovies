@@ -1,8 +1,7 @@
-package com.kaks.charles.getyourmovies;
+package com.kaks.charles.getyourmovies.UI;
 
 import android.content.Context;
 import android.content.Intent;
-import android.icu.util.ULocale;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -15,6 +14,9 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.kaks.charles.getyourmovies.Constants;
+import com.kaks.charles.getyourmovies.R;
+import com.kaks.charles.getyourmovies.SavedMovies;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
@@ -25,7 +27,9 @@ public class MainActivity extends AppCompatActivity {
     @Bind(R.id.edittext_categories) EditText mEditCategory;
     @Bind(R.id.button_genre) Button mButtonGenre;
     @Bind(R.id.button_movies) Button mButtonMovies;
+    @Bind(R.id.savedMovieButton) Button mSavedButton;
     private DatabaseReference mPopularMovies;
+    private ValueEventListener mSearchedMovieReference;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
@@ -33,7 +37,7 @@ public class MainActivity extends AppCompatActivity {
                     .getInstance()
                     .getReference()
                     .child(Constants.FIREBASE_CHILD_SEARCHED_MOVIE);
-        mPopularMovies.addValueEventListener(new ValueEventListener() { //attach listener to listen for changes in the DB.
+        mSearchedMovieReference = mPopularMovies.addValueEventListener(new ValueEventListener() { //attach listener to listen for changes in the DB.
 
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) { //something changes intialsize this method
@@ -76,6 +80,14 @@ public class MainActivity extends AppCompatActivity {
 
             }
         });
+        mSavedButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(MainActivity.this,SavedMovies.class);
+                startActivity(intent);
+
+            }
+        });
 
 
     }
@@ -85,5 +97,10 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void attachBaseContext(Context newBase) {
         super.attachBaseContext(CalligraphyContextWrapper.wrap(newBase));
+    }
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        mPopularMovies.removeEventListener(mSearchedMovieReference);
     }
 }

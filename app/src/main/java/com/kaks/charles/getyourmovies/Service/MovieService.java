@@ -1,7 +1,8 @@
-package com.kaks.charles.getyourmovies;
+package com.kaks.charles.getyourmovies.Service;
 
 import android.util.Log;
 
+import com.kaks.charles.getyourmovies.Constants;
 import com.kaks.charles.getyourmovies.models.MovieModel;
 import com.kaks.charles.getyourmovies.models.MovieSearch;
 
