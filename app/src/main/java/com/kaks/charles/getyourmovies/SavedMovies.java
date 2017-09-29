@@ -6,6 +6,8 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.kaks.charles.getyourmovies.adapter.FirebasePopularViewHolder;
@@ -19,8 +21,7 @@ public class SavedMovies extends AppCompatActivity {
     private DatabaseReference mMovieReference;
     private FirebaseRecyclerAdapter mMovieAdapter;
 
-    @Bind(R.id.popular_list)
-    RecyclerView mRecyclerView;
+    @Bind(R.id.popular_list) RecyclerView mRecyclerView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -29,7 +30,13 @@ public class SavedMovies extends AppCompatActivity {
         setContentView(R.layout.activity_popular);
         ButterKnife.bind(this);
 
-        mMovieReference = FirebaseDatabase.getInstance().getReference(Constants.FIREBASE_CHILD_POPULAR_MOVIES);
+        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+        String uid = user.getUid();
+
+        mMovieReference = FirebaseDatabase
+                .getInstance()
+                .getReference(Constants.FIREBASE_CHILD_POPULAR_MOVIES)
+                .child(uid);
         setUpFirebaseAdapter();
     }
 

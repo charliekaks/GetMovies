@@ -11,7 +11,8 @@
         android:layout_height="match_parent"
         android:layout_gravity="center"
         android:layout_margin="@dimen/card_margin"
-        android:elevation="3dp">
+        android:elevation="3dp"
+        app:cardBackgroundColor="@color/common_google_signin_btn_text_dark_default">
 
         <RelativeLayout
             android:layout_width="match_parent"
@@ -21,7 +22,7 @@
                 android:id="@+id/image_url"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:scaleType="centerInside"
+                android:scaleType="fitXY"
                 app:srcCompat="@drawable/jungle" />
 
             <TextView

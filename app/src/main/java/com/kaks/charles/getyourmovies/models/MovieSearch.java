@@ -19,6 +19,7 @@ public class MovieSearch {
         private int popularity;
         private String original_name;
         private String first_release;
+        private String pushId;
         public MovieSearch(){
         }
         public MovieSearch(String overview, String original_title, String title, String poster_path, String release_date, Integer vote_average, Integer popularity, String o_name, String release){
@@ -67,6 +68,18 @@ public class MovieSearch {
         public String getOriginal_name(){return original_name;}
 
         public String getFirst_release(){return first_release;}
+
+
+    public String getPushId() {
+        return pushId;
+    }
+
+    public void setPushId(String pushId) {
+        this.pushId = pushId;
+    }
+
+
+
 
 
 }

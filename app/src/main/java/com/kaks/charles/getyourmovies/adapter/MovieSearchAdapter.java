@@ -10,6 +10,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.kaks.charles.getyourmovies.MovieDetails;
+import com.kaks.charles.getyourmovies.MovieSearchDetail;
 import com.kaks.charles.getyourmovies.R;
 import com.kaks.charles.getyourmovies.models.MovieModel;
 import com.kaks.charles.getyourmovies.models.MovieSearch;
@@ -76,7 +77,9 @@ public class MovieSearchAdapter extends RecyclerView.Adapter<MovieSearchAdapter.
 
         }
         public void bindMovies(MovieSearch movies) {
+
             title.setText(movies.getOriginal_name());
+            title.setText(movies.getOriginal_title());
             // overview.setText(movies.getOverview());
             voterAverage.setText("Vote" + " "+ String.valueOf(movies.getVote_average())+"/10");
             // release.setText("Movie Release Date \n"+movies.getRelease_date());
@@ -88,7 +91,7 @@ public class MovieSearchAdapter extends RecyclerView.Adapter<MovieSearchAdapter.
         @Override
         public void onClick(View view) {
             int itemPosition = getLayoutPosition();
-            Intent intent = new Intent(mContext, MovieDetails.class);
+            Intent intent = new Intent(mContext, MovieSearchDetail.class);
             intent.putExtra("position", itemPosition);
             intent.putExtra("movies", Parcels.wrap(mMovies));
             intent.setFlags(FLAG_ACTIVITY_NEW_TASK);

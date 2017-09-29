@@ -1,6 +1,7 @@
 package com.kaks.charles.getyourmovies.UI;
 
 import android.content.Intent;
+import android.support.transition.Fade;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
@@ -30,13 +31,13 @@ public class Movies extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_movies);
         ButterKnife.bind(this);
-
         Intent intent = getIntent();
         String categories = intent.getStringExtra("categories");
 //        mTextView.setText(categories);
         getMovies(categories);
 
     }
+
     private  void getMovies(String categories){
         final MovieService movieService = new MovieService();
             movieService.findMovie(categories, new Callback() {

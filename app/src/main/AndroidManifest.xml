@@ -15,8 +15,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".UI.MainActivity">
-        </activity>
+        <activity android:name=".UI.MainActivity"></activity>
         <activity android:name=".UI.Movies" />
         <activity android:name=".UI.Popular" />
         <activity android:name=".MovieDetails" />
@@ -28,7 +27,8 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".UI.CreateAccount"></activity>
+        <activity android:name=".UI.CreateAccount" />
+        <activity android:name=".MovieSearchDetail"></activity>
     </application>
 
 </manifest>

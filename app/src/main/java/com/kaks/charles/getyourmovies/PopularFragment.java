@@ -3,6 +3,7 @@ package com.kaks.charles.getyourmovies;
 import android.content.Context;
 import android.net.Uri;
 import android.os.Bundle;
+import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -12,9 +13,12 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.kaks.charles.getyourmovies.models.MovieModel;
+import com.kaks.charles.getyourmovies.models.MovieSearch;
 import com.squareup.picasso.Picasso;
 
 import org.parceler.Parcels;
@@ -26,10 +30,8 @@ public class PopularFragment extends Fragment implements View.OnClickListener {
     @Bind(R.id.image_details)
     ImageView mImageDetails;
     @Bind(R.id.overview_details) TextView mOverViewDetails;
-    @Bind(R.id.release_date_details) TextView mReleaseDetails;
     @Bind(R.id.title_details) TextView mTitle;
-    @Bind(R.id.save_movie)
-    Button mSavedButton;
+    @Bind(R.id.save_movie) Button mSavedButton;
     private MovieModel mMovies;
 
     public static PopularFragment newInstance(MovieModel movie) {
@@ -55,7 +57,6 @@ public class PopularFragment extends Fragment implements View.OnClickListener {
         Picasso.with(view.getContext()).load(mMovies.getPoster_path()).into(mImageDetails);
         mTitle.setText(mMovies.getTitle());
         mOverViewDetails.setText(mMovies.getOverview());
-        mReleaseDetails.setText("The release Date \n"+mMovies.getRelease_date());
         mSavedButton.setOnClickListener(this);
 
         return view;
@@ -65,11 +66,20 @@ public class PopularFragment extends Fragment implements View.OnClickListener {
     public void onClick(View v) {
 
         if (v == mSavedButton) {
-            DatabaseReference restaurantRef = FirebaseDatabase
+            FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+            String uid = user.getUid();
+
+            DatabaseReference movieRef = FirebaseDatabase
                     .getInstance()
-                    .getReference(Constants.FIREBASE_CHILD_POPULAR_MOVIES);
-            restaurantRef.push().setValue(mMovies);
-            Toast.makeText(getContext(), "Saved", Toast.LENGTH_SHORT).show();
+                    .getReference(Constants.FIREBASE_CHILD_POPULAR_MOVIES)
+                    .child(uid);
+            DatabaseReference pushRef= movieRef.push();
+            String pushId = pushRef.getKey();
+            mMovies.setPushId(pushId);
+            pushRef.setValue(mMovies);
+            //movieRef.push().setValue(mSearchMovies);
+            Snackbar.make(getView(), "Saved", Snackbar.LENGTH_SHORT).show();
+            //Toast.makeText(getContext(), "Saved", Toast.LENGTH_SHORT).show();
         }
     }
 
