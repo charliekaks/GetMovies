@@ -1,5 +1,9 @@
 # GetMovies
-_This is an Android app that enables you to keep up with the latest movies and tv series, in addition to documentaries._
+_This is an Android app that enables you to keep up with the latest movies and tv series._
+# Uses for the App
+1. Allows the user to view popular movies and also search for the movies they might want to view.
+2. The app also allows tol save favorite movies and series to their personal accounts on the app.
+3. It has login functionality to enable the above.
 
 ## Getting Started
 For development and testing follow these steps:
