@@ -29,6 +29,7 @@ import java.util.ArrayList;
 public class FirebasePopularViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
     private static final int MAX_WIDTH = 200;
     private static final int MAX_HEIGHT = 200;
+    public ImageView mMovieImageView;
 
     View mView;
     Context mContext;
@@ -40,6 +41,7 @@ public class FirebasePopularViewHolder extends RecyclerView.ViewHolder implement
     }
 
     public void bindMovies(MovieModel movies) {
+        mMovieImageView = (ImageView) mView.findViewById(R.id.image_url);
         TextView title = (TextView) mView.findViewById(R.id.title);
         TextView voterAverage = (TextView) mView.findViewById(R.id.v_average);
         ImageView image = (ImageView) mView.findViewById(R.id.image_url);
@@ -49,7 +51,7 @@ public class FirebasePopularViewHolder extends RecyclerView.ViewHolder implement
         voterAverage.setText("Vote" + " "+ String.valueOf(movies.getVote_average())+"/10");
         // release.setText("Movie Release Date \n"+movies.getRelease_date());
         // popularity.setText("Movie Popularity"+" "+String.valueOf(movies.getPopularity()));
-        Picasso.with(mContext).load(movies.getPoster_path()).into(image);
+        Picasso.with(mContext).load(movies.getPoster_path()).into(mMovieImageView);
 
     }
 
