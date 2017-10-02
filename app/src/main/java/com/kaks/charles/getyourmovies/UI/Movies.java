@@ -1,7 +1,6 @@
 package com.kaks.charles.getyourmovies.UI;
 
 import android.content.Intent;
-import android.support.transition.Fade;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
@@ -12,7 +11,7 @@ import android.widget.TextView;
 import com.kaks.charles.getyourmovies.Service.MovieService;
 import com.kaks.charles.getyourmovies.R;
 import com.kaks.charles.getyourmovies.adapter.MovieSearchAdapter;
-import com.kaks.charles.getyourmovies.models.MovieSearch;
+import com.kaks.charles.getyourmovies.models.MovieModel;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -49,7 +48,7 @@ public class Movies extends AppCompatActivity {
 
                 @Override
                 public void onResponse(Call call, Response response)  {
-                    final ArrayList<MovieSearch> mMovies = movieService.processMoviesSearched(response);
+                    final ArrayList<MovieModel> mMovies = movieService.processMovies(response);
                     Movies.this.runOnUiThread(new Runnable() {
                         @Override
                         public void run() {
@@ -59,16 +58,7 @@ public class Movies extends AppCompatActivity {
                             MovieSearchAdapter movieSearch = new MovieSearchAdapter(getApplicationContext(),mMovies);
                             MovieSearchAdapter.setAdapter(movieSearch);
                             MovieSearchAdapter.setHasFixedSize(true);
-                            for (MovieSearch movie :mMovies){
-                                Log.d("movie overview",movie.getOverview());
-                                Log.d("The original Name", movie.getOriginal_name());
-                                Log.d("The movie Title", movie.getTitle());
-                                Log.d("The Movie Poster", movie.getPoster_path());
-                                Log.d("Release Date",movie.getRelease_date());
-                                Log.d("First Release",movie.getFirst_release());
-                                Log.d("Popularity",Double.toString(movie.getPopularity()));
-                                Log.d("Voter Average",Double.toString(movie.getVote_average()));
-                            }
+
                         }
                     });
                 }

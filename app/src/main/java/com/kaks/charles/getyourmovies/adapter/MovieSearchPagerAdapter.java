@@ -5,7 +5,7 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 
 import com.kaks.charles.getyourmovies.SearchFragment;
-import com.kaks.charles.getyourmovies.models.MovieSearch;
+import com.kaks.charles.getyourmovies.models.MovieModel;
 
 import java.util.ArrayList;
 
@@ -14,9 +14,9 @@ import java.util.ArrayList;
  */
 
 public class MovieSearchPagerAdapter extends FragmentPagerAdapter {
-    private ArrayList<MovieSearch> mMovies;
+    private ArrayList<MovieModel> mMovies;
 
-    public MovieSearchPagerAdapter (FragmentManager fm, ArrayList<MovieSearch> movies) {
+    public MovieSearchPagerAdapter (FragmentManager fm, ArrayList<MovieModel> movies) {
         super(fm);
         mMovies = movies;
     }

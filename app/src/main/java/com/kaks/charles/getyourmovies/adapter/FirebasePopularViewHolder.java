@@ -26,11 +26,11 @@ import java.util.ArrayList;
  * Created by charles on 9/22/17.
  */
 
-public class FirebasePopularViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
+public class FirebasePopularViewHolder extends RecyclerView.ViewHolder {
     private static final int MAX_WIDTH = 200;
     private static final int MAX_HEIGHT = 200;
     public ImageView mMovieImageView;
-
+    public ImageView mMovieImageViewRecoder;
     View mView;
     Context mContext;
     public FirebasePopularViewHolder(View itemView) {
@@ -41,6 +41,7 @@ public class FirebasePopularViewHolder extends RecyclerView.ViewHolder implement
 
     public void bindMovies(MovieModel movies) {
         mMovieImageView = (ImageView) mView.findViewById(R.id.image_url);
+        mMovieImageViewRecoder = (ImageView) mView.findViewById(R.id.recoder_id);
         TextView title = (TextView) mView.findViewById(R.id.title);
         TextView voterAverage = (TextView) mView.findViewById(R.id.v_average);
         ImageView image = (ImageView) mView.findViewById(R.id.image_url);
@@ -54,27 +55,4 @@ public class FirebasePopularViewHolder extends RecyclerView.ViewHolder implement
 
     }
 
-
-    @Override
-    public void onClick(View view) {
-        final ArrayList<MovieModel> popular = new ArrayList<>();
-        DatabaseReference ref = FirebaseDatabase.getInstance().getReference(Constants.FIREBASE_CHILD_POPULAR_MOVIES);
-        ref.addListenerForSingleValueEvent(new ValueEventListener() {
-
-            @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
-                for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
-                    popular.add(snapshot.getValue(MovieModel.class));
-                }
-
-                int itemPosition = getLayoutPosition();
-
-
-            }
-
-            @Override
-            public void onCancelled(DatabaseError databaseError) {
-            }
-        });
-    }
 }

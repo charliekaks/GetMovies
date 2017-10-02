@@ -9,11 +9,9 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.kaks.charles.getyourmovies.MovieDetails;
 import com.kaks.charles.getyourmovies.MovieSearchDetail;
 import com.kaks.charles.getyourmovies.R;
 import com.kaks.charles.getyourmovies.models.MovieModel;
-import com.kaks.charles.getyourmovies.models.MovieSearch;
 import com.squareup.picasso.Picasso;
 
 import org.parceler.Parcels;
@@ -26,8 +24,8 @@ import static android.content.Intent.FLAG_ACTIVITY_NEW_TASK;
 public class MovieSearchAdapter extends RecyclerView.Adapter<MovieSearchAdapter.ViewHolder> {
     private final Context mContext;
     private final LayoutInflater layoutInflater;
-    private final List<MovieSearch> mMovies;
-    public MovieSearchAdapter(Context mContext, List<MovieSearch> movies) {
+    private final List<MovieModel> mMovies;
+    public MovieSearchAdapter(Context mContext, List<MovieModel> movies) {
         this.mContext = mContext;
         layoutInflater = LayoutInflater.from(mContext);
         this.mMovies = movies;
@@ -76,9 +74,8 @@ public class MovieSearchAdapter extends RecyclerView.Adapter<MovieSearchAdapter.
 
 
         }
-        public void bindMovies(MovieSearch movies) {
+        public void bindMovies(MovieModel movies) {
 
-            title.setText(movies.getOriginal_name());
             title.setText(movies.getOriginal_title());
             // overview.setText(movies.getOverview());
             voterAverage.setText("Vote" + " "+ String.valueOf(movies.getVote_average())+"/10");

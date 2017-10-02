@@ -71,6 +71,6 @@
         android:layout_alignTop="@+id/edittext_categories"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="70dp"
-        android:text="Button" />
+        android:text="Search " />
 
 </RelativeLayout>

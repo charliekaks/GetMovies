@@ -1,7 +1,5 @@
 package com.kaks.charles.getyourmovies;
 
-import android.content.Context;
-import android.net.Uri;
 import android.os.Bundle;
 import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
@@ -11,14 +9,12 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.kaks.charles.getyourmovies.models.MovieModel;
-import com.kaks.charles.getyourmovies.models.MovieSearch;
 import com.squareup.picasso.Picasso;
 
 import org.parceler.Parcels;
@@ -33,11 +29,11 @@ public class SearchFragment extends Fragment implements View.OnClickListener{
     @Bind(R.id.title_details) TextView mTitle;
     @Bind(R.id.save_movie)
     Button mSavedButton;
-    private MovieSearch mSearchMovies;
+    private MovieModel mSearchMovies;
 
 
 
-    public static SearchFragment newInstance(MovieSearch movie) {
+    public static SearchFragment newInstance(MovieModel movie) {
         SearchFragment fragment = new SearchFragment();
         Bundle args = new Bundle();
         args.putParcelable("movie", Parcels.wrap(movie));

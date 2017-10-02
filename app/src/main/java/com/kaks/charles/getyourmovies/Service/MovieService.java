@@ -4,7 +4,6 @@ import android.util.Log;
 
 import com.kaks.charles.getyourmovies.Constants;
 import com.kaks.charles.getyourmovies.models.MovieModel;
-import com.kaks.charles.getyourmovies.models.MovieSearch;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -89,51 +88,5 @@ public class MovieService {
         return movies;
     }
 
-    public ArrayList<MovieSearch> processMoviesSearched(Response response){
-        ArrayList<MovieSearch> moviesSearched = new ArrayList<>();
-        try {
-            String jsonData = response.body().string();
-            if (response.isSuccessful()){
-                JSONObject movieJSON = new JSONObject(jsonData);
-                JSONArray resultJSON = movieJSON.getJSONArray("results");
-                for (int i = 0; i <resultJSON.length() ; i++) {
-                    JSONObject movieResults = resultJSON.getJSONObject(i);
-                    if (movieResults.getString("media_type").equals("tv")){
-                    String overview = movieResults.getString("overview");
-                    String original_title = "";
-                    String title ="";
-                    String originalName = movieResults.getString("original_name");
-                    String imageUrl = "https://image.tmdb.org/t/p/w500"+movieResults.getString("poster_path");
-                    String release = "";
-                    String release_date = movieResults.getString("first_air_date");
-                    Integer voter_average = movieResults.getInt("vote_average");
-                    Integer popularity = movieResults.getInt("popularity");
-                       MovieSearch mMoviesSearch = new MovieSearch(overview,original_title,title,imageUrl,release,voter_average,popularity,originalName,release_date);
-                        moviesSearched.add(mMoviesSearch);
-                    }else{
-                        String overview = movieResults.getString("overview");
-                        String original_title = movieResults.getString("original_title");
-                        String title = movieResults.getString("title");
-                        String originalName = "";
-                        String imageUrl = "https://image.tmdb.org/t/p/w500"+movieResults.getString("poster_path");
-                        String release = movieResults.getString("release_date");
-                        String release_date = "";
-                        Integer voter_average = movieResults.getInt("vote_average");
-                        Integer popularity = movieResults.getInt("popularity");
-                        MovieSearch mMoviesSearch = new MovieSearch(overview,original_title,title,imageUrl,release,voter_average,popularity,originalName,release_date);
-                        moviesSearched.add(mMoviesSearch);
-                    }
 
-
-
-                }
-
-            }
-        } catch (JSONException e) {
-            e.printStackTrace();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        return moviesSearched;
-    }
 }

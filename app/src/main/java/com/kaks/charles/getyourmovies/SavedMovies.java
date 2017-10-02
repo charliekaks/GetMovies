@@ -43,29 +43,30 @@ public class SavedMovies extends AppCompatActivity implements OnStartDragListene
     private void setUpFirebaseAdapter() {
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
         String uid = user.getUid();
-
+//
         Query query = FirebaseDatabase
                 .getInstance()
                 .getReference(Constants.FIREBASE_CHILD_POPULAR_MOVIES)
                 .child(uid)
                 .orderByChild(Constants.FIREBASE_QUERY_INDEX);
         mMovieAdapter =  new FirebaseMoviesListAdapter(MovieModel.class,R.layout.movie_item_drag,FirebasePopularViewHolder.class,query, this,this);
-        mRecyclerView.setHasFixedSize(true);
         mRecyclerView.setLayoutManager(new LinearLayoutManager(this));
-        mRecyclerView.setAdapter(mMovieAdapter);
         ItemTouchHelper.Callback callback = new SimpleItemTouchHelperCallback(mMovieAdapter);
         mItemTouchHelper = new ItemTouchHelper(callback);
         mItemTouchHelper.attachToRecyclerView(mRecyclerView);
+        mRecyclerView.setAdapter(mMovieAdapter);
+
     }
 
-
-    @Override
-    public void onStartDrag(RecyclerView.ViewHolder viewHolder) {
-        mItemTouchHelper.startDrag(viewHolder);
-    }
     @Override
     protected void onDestroy() {
         super.onDestroy();
         mMovieAdapter.cleanup();
     }
+
+    @Override
+    public void onStartDrag(RecyclerView.ViewHolder viewHolder) {
+        mItemTouchHelper.startDrag(viewHolder);
+    }
+
 }

@@ -66,13 +66,14 @@ public class FirebaseMoviesListAdapter extends FirebaseRecyclerAdapter<MovieMode
 
             }
         });
+
     }
 
 
     @Override
     protected void populateViewHolder(final FirebasePopularViewHolder viewHolder, MovieModel model, int position) {
         viewHolder.bindMovies(model);
-        viewHolder.mMovieImageView.setOnTouchListener(new View.OnTouchListener() {
+        viewHolder.mMovieImageViewRecoder.setOnTouchListener(new View.OnTouchListener() {
             @Override
             public boolean onTouch(View v, MotionEvent event) {
                 if (MotionEventCompat.getActionMasked(event) == MotionEvent.ACTION_DOWN) {
@@ -86,11 +87,13 @@ public class FirebaseMoviesListAdapter extends FirebaseRecyclerAdapter<MovieMode
             public void onClick(View view) {
                 Intent intent = new Intent(mContext, MovieDetails.class);
                 intent.putExtra("position", viewHolder.getAdapterPosition());
-                intent.putExtra("popular", Parcels.wrap(mMoviesPopular));
+                intent.putExtra("movies", Parcels.wrap(mMoviesPopular));
 
                 mContext.startActivity(intent);
             }
         });
+
+
     }
 
     @Override
@@ -105,12 +108,7 @@ public class FirebaseMoviesListAdapter extends FirebaseRecyclerAdapter<MovieMode
         mMoviesPopular.remove(position);
         getRef(position).removeValue();
     }
-    @Override
-    public void cleanup() {
-        super.cleanup();
-        setIndexInFirebase();
-        mRef.removeEventListener(mChildEventListener);
-    }
+
     private void setIndexInFirebase(){
         for (MovieModel movies : mMoviesPopular) {
             int index = mMoviesPopular.indexOf(movies);
@@ -119,6 +117,14 @@ public class FirebaseMoviesListAdapter extends FirebaseRecyclerAdapter<MovieMode
             ref.setValue(movies);
         }
     }
+
+    @Override
+    public void cleanup() {
+        super.cleanup();
+        setIndexInFirebase();
+        mRef.removeEventListener(mChildEventListener);
+    }
+
 
 
 }

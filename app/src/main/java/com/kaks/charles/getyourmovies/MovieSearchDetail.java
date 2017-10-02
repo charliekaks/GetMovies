@@ -5,7 +5,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
 import com.kaks.charles.getyourmovies.adapter.MovieSearchPagerAdapter;
-import com.kaks.charles.getyourmovies.models.MovieSearch;
+import com.kaks.charles.getyourmovies.models.MovieModel;
 
 import org.parceler.Parcels;
 
@@ -18,7 +18,7 @@ public class MovieSearchDetail extends AppCompatActivity {
     @Bind(R.id.viewPager2)
     ViewPager mViewPager2;
     private MovieSearchPagerAdapter adapterViewPager2;
-    ArrayList<MovieSearch> mMovies = new ArrayList<>();
+    ArrayList<MovieModel> mMovies = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
