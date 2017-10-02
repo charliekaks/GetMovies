@@ -12,6 +12,7 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.Query;
 import com.kaks.charles.getyourmovies.adapter.FirebaseMoviesListAdapter;
 import com.kaks.charles.getyourmovies.adapter.FirebasePopularViewHolder;
 import com.kaks.charles.getyourmovies.models.MovieModel;
@@ -43,11 +44,12 @@ public class SavedMovies extends AppCompatActivity implements OnStartDragListene
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
         String uid = user.getUid();
 
-        mMovieReference = FirebaseDatabase
+        Query query = FirebaseDatabase
                 .getInstance()
                 .getReference(Constants.FIREBASE_CHILD_POPULAR_MOVIES)
-                .child(uid);
-        mMovieAdapter =  new FirebaseMoviesListAdapter(MovieModel.class,R.layout.movie_item_drag,FirebasePopularViewHolder.class,mMovieReference, this,this);
+                .child(uid)
+                .orderByChild(Constants.FIREBASE_QUERY_INDEX);
+        mMovieAdapter =  new FirebaseMoviesListAdapter(MovieModel.class,R.layout.movie_item_drag,FirebasePopularViewHolder.class,query, this,this);
         mRecyclerView.setHasFixedSize(true);
         mRecyclerView.setLayoutManager(new LinearLayoutManager(this));
         mRecyclerView.setAdapter(mMovieAdapter);
