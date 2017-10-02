@@ -1,7 +1,6 @@
 package com.kaks.charles.getyourmovies.adapter;
 
 import android.content.Context;
-import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.ImageView;
@@ -13,33 +12,31 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.kaks.charles.getyourmovies.Constants;
-import com.kaks.charles.getyourmovies.MovieDetails;
 import com.kaks.charles.getyourmovies.R;
 import com.kaks.charles.getyourmovies.models.MovieModel;
+import com.kaks.charles.getyourmovies.models.MovieSearch;
 import com.squareup.picasso.Picasso;
-
-import org.parceler.Parcels;
 
 import java.util.ArrayList;
 
 /**
- * Created by charles on 9/22/17.
+ * Created by charles on 10/2/17.
  */
 
-public class FirebasePopularViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
+public class FireBaseSearchViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener  {
     private static final int MAX_WIDTH = 200;
     private static final int MAX_HEIGHT = 200;
     public ImageView mMovieImageView;
 
     View mView;
     Context mContext;
-    public FirebasePopularViewHolder(View itemView) {
+    public FireBaseSearchViewHolder(View itemView) {
         super(itemView);
         mView = itemView;
         mContext = itemView.getContext();
     }
 
-    public void bindMovies(MovieModel movies) {
+    public void bindSearchedMovies(MovieSearch movies) {
         mMovieImageView = (ImageView) mView.findViewById(R.id.image_url);
         TextView title = (TextView) mView.findViewById(R.id.title);
         TextView voterAverage = (TextView) mView.findViewById(R.id.v_average);
@@ -57,14 +54,14 @@ public class FirebasePopularViewHolder extends RecyclerView.ViewHolder implement
 
     @Override
     public void onClick(View view) {
-        final ArrayList<MovieModel> popular = new ArrayList<>();
+        final ArrayList<MovieSearch> popular = new ArrayList<>();
         DatabaseReference ref = FirebaseDatabase.getInstance().getReference(Constants.FIREBASE_CHILD_POPULAR_MOVIES);
         ref.addListenerForSingleValueEvent(new ValueEventListener() {
 
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
-                    popular.add(snapshot.getValue(MovieModel.class));
+                    popular.add(snapshot.getValue(MovieSearch.class));
                 }
 
                 int itemPosition = getLayoutPosition();
