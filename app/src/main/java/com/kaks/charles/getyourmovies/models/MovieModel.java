@@ -12,6 +12,7 @@ public class MovieModel {
     private int vote_average;
     private int popularity;
     private String pushId;
+    String index;
     public MovieModel(){
     }
     public MovieModel(String overview, String original_title, String title, String poster_path, String release_date, Integer vote_average, Integer popularity){
@@ -22,6 +23,7 @@ public class MovieModel {
         this.release_date=release_date;
         this.vote_average=vote_average;
         this.popularity=popularity;
+        this.index = "not_specified";
     }
 
     public String getOverview(){
@@ -61,6 +63,14 @@ public class MovieModel {
 
     public void setPushId(String pushId) {
         this.pushId = pushId;
+    }
+
+    public String getIndex() {
+        return index;
+    }
+
+    public void setIndex(String index) {
+        this.index = index;
     }
 
 

@@ -20,6 +20,7 @@ public class MovieSearch {
         private String original_name;
         private String first_release;
         private String pushId;
+        private String index;
         public MovieSearch(){
         }
         public MovieSearch(String overview, String original_title, String title, String poster_path, String release_date, Integer vote_average, Integer popularity, String o_name, String release){
@@ -32,6 +33,7 @@ public class MovieSearch {
             this.popularity=popularity;
             this.original_name = o_name;
             this.first_release = release;
+            this.index = "not_specified";
         }
 
         public String getOverview(){
@@ -76,6 +78,13 @@ public class MovieSearch {
 
     public void setPushId(String pushId) {
         this.pushId = pushId;
+    }
+    public String getIndex() {
+        return index;
+    }
+
+    public void setIndex(String index) {
+        this.index = index;
     }
 
 
